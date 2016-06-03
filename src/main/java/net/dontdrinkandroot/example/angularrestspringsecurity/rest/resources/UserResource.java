@@ -33,7 +33,7 @@ public class UserResource
 {
 
 	@Autowired
-	private UserDetailsService userService;
+	private UserDetailsService customerUserDetailsService;
 
 	@Autowired
 	@Qualifier("authenticationManager")
@@ -83,7 +83,7 @@ public class UserResource
 		 * Reload user as password of authentication principal will be null after authorization and
 		 * password is needed for token generation
 		 */
-		UserDetails userDetails = this.userService.loadUserByUsername(username);
+		UserDetails userDetails = this.customerUserDetailsService.loadUserByUsername(username);
 
 		return new TokenTransfer(TokenUtils.createToken(userDetails));
 	}
