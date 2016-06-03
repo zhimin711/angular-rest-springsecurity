@@ -10,10 +10,12 @@
 		<version.org.springframework>4.2.5.RELEASE</version.org.springframework>
 		<version.com.sun.jersey.contribs>1.19.1</version.com.sun.jersey.contribs>
 		<version.org.hibernate>4.2.21.Final</version.org.hibernate>
+
 		<org.slf4j.version>1.7.7</org.slf4j.version>
 		<javax.servlet-api.version>2.5</javax.servlet-api.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
 		<org.hsqldb.version>2.3.2</org.hsqldb.version>
+		<mysql.version>5.1.30</mysql.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<junit.version>4.11</junit.version>
 		<org.eclipse.jetty.jetty-maven-plugin.version>9.1.1.v20140108</org.eclipse.jetty.jetty-maven-plugin.version>
@@ -62,6 +64,13 @@
 	</scm>
 
 	<dependencies>
+
+		<!-- mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>

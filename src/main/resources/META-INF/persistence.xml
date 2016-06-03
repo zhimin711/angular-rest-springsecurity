@@ -7,5 +7,8 @@
 	<persistence-unit name="examplePU">
 		<class>net.dontdrinkandroot.example.angularrestspringsecurity.entity.NewsEntry</class>
 		<class>net.dontdrinkandroot.example.angularrestspringsecurity.entity.User</class>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+		</properties>
 	</persistence-unit>
 </persistence>
