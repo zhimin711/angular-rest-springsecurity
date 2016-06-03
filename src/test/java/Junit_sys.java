@@ -31,7 +31,7 @@ public class Junit_sys {
         record.setEnabled(true);
         Set<SysRole> roles = new HashSet<SysRole>();
         SysRole role =new SysRole();
-        role.setName("admin");
+        role.setName("系统管理员");
         role.setKey("SYS_ADMIN");
         role.setEnabled(true);
         role.setSys(true);

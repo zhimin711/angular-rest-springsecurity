@@ -48,7 +48,7 @@
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceUnitName" value="T_PU" />
+		<property name="persistenceUnitName" value="Chaoyun_Unit" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="true" />
@@ -118,16 +118,16 @@
 		<security:csrf disabled="true"/>
 		<security:custom-filter ref="authenticationTokenProcessingFilter" position="PRE_AUTH_FILTER" />
 		<security:intercept-url pattern="/rest/user/authenticate" access="permitAll" />
-		<security:intercept-url method="GET" pattern="/rest/news/**" access="hasRole('USER')" />
-		<security:intercept-url method="PUT" pattern="/rest/news/**" access="hasRole('ADMIN')" />
-		<security:intercept-url method="POST" pattern="/rest/news/**" access="hasRole('ADMIN')" />
-		<security:intercept-url method="DELETE" pattern="/rest/news/**" access="hasRole('ADMIN')" />
+		<security:intercept-url method="GET" pattern="/rest/news/**" access="hasRole('SYS_ADMIN,USER')" />
+		<security:intercept-url method="PUT" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')" />
+		<security:intercept-url method="POST" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')" />
+		<security:intercept-url method="DELETE" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')" />
 	</security:http>
 
 	<bean id="unauthorizedEntryPoint" class="net.dontdrinkandroot.example.angularrestspringsecurity.rest.UnauthorizedEntryPoint" />
 
 	<bean id="authenticationTokenProcessingFilter" class="net.dontdrinkandroot.example.angularrestspringsecurity.rest.AuthenticationTokenProcessingFilter">
-		<constructor-arg ref="userDao" />
+		<constructor-arg ref="customerUserDetailsService" />
 	</bean>
 
 </beans>

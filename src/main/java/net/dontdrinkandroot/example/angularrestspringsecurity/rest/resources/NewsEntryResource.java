@@ -33,90 +33,83 @@ import net.dontdrinkandroot.example.angularrestspringsecurity.entity.Role;
 
 @Component
 @Path("/news")
-public class NewsEntryResource
-{
+public class NewsEntryResource {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private NewsEntryDao newsEntryDao;
+    @Autowired
+    private NewsEntryDao newsEntryDao;
 
-	@Autowired
-	private ObjectMapper mapper;
+    @Autowired
+    private ObjectMapper mapper;
 
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public String list() throws JsonGenerationException, JsonMappingException, IOException
-	{
-		this.logger.info("list()");
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String list() throws JsonGenerationException, JsonMappingException, IOException {
+        this.logger.info("list()");
 
-		ObjectWriter viewWriter;
-		if (this.isAdmin()) {
-			viewWriter = this.mapper.writerWithView(JsonViews.Admin.class);
-		} else {
-			viewWriter = this.mapper.writerWithView(JsonViews.User.class);
-		}
-		List<NewsEntry> allEntries = this.newsEntryDao.findAll();
+        ObjectWriter viewWriter;
+        if (this.isAdmin()) {
+            viewWriter = this.mapper.writerWithView(JsonViews.Admin.class);
+        } else {
+            viewWriter = this.mapper.writerWithView(JsonViews.User.class);
+        }
+        List<NewsEntry> allEntries = this.newsEntryDao.findAll();
 
-		return viewWriter.writeValueAsString(allEntries);
-	}
+        return viewWriter.writeValueAsString(allEntries);
+    }
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("{id}")
-	public NewsEntry read(@PathParam("id") Long id)
-	{
-		this.logger.info("read(id)");
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public NewsEntry read(@PathParam("id") Long id) {
+        this.logger.info("read(id)");
 
-		NewsEntry newsEntry = this.newsEntryDao.find(id);
-		if (newsEntry == null) {
-			throw new WebApplicationException(404);
-		}
-		return newsEntry;
-	}
+        NewsEntry newsEntry = this.newsEntryDao.find(id);
+        if (newsEntry == null) {
+            throw new WebApplicationException(404);
+        }
+        return newsEntry;
+    }
 
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public NewsEntry create(NewsEntry newsEntry)
-	{
-		this.logger.info("create(): " + newsEntry);
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public NewsEntry create(NewsEntry newsEntry) {
+        this.logger.info("create(): " + newsEntry);
 
-		return this.newsEntryDao.save(newsEntry);
-	}
+        return this.newsEntryDao.save(newsEntry);
+    }
 
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("{id}")
-	public NewsEntry update(@PathParam("id") Long id, NewsEntry newsEntry)
-	{
-		this.logger.info("update(): " + newsEntry);
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public NewsEntry update(@PathParam("id") Long id, NewsEntry newsEntry) {
+        this.logger.info("update(): " + newsEntry);
 
-		return this.newsEntryDao.save(newsEntry);
-	}
+        return this.newsEntryDao.save(newsEntry);
+    }
 
-	@DELETE
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("{id}")
-	public void delete(@PathParam("id") Long id)
-	{
-		this.logger.info("delete(id)");
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public void delete(@PathParam("id") Long id) {
+        this.logger.info("delete(id)");
 
-		this.newsEntryDao.delete(id);
-	}
+        this.newsEntryDao.delete(id);
+    }
 
-	private boolean isAdmin()
-	{
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Object principal = authentication.getPrincipal();
-		if ((principal instanceof String) && ((String) principal).equals("anonymousUser")) {
-			return false;
-		}
-		UserDetails userDetails = (UserDetails) principal;
+    private boolean isAdmin() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        if ((principal instanceof String) && ((String) principal).equals("anonymousUser")) {
+            return false;
+        }
+        UserDetails userDetails = (UserDetails) principal;
 
-		return userDetails.getAuthorities().contains(Role.ADMIN);
-	}
+        return userDetails.getAuthorities().contains(Role.ADMIN);
+    }
 
 }
