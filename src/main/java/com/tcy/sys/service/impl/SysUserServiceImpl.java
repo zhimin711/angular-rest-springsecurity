@@ -1,5 +1,6 @@
 package com.tcy.sys.service.impl;
 
+import com.tcy.app.result.PageResult;
 import com.tcy.sys.entity.SysRole;
 import com.tcy.sys.entity.SysUser;
 import com.tcy.sys.repository.SysUserRepository;
@@ -8,6 +9,10 @@ import com.tcy.utils.PasswordUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -60,6 +65,19 @@ public class SysUserServiceImpl implements SysUserService {
 
     public List<SysUser> findAll() {
         return sysUserRepository.findAll();
+    }
+
+    @Override
+    public PageResult<SysUser> findPage(SysUser record, int pageNum, int pageSize) {
+        if (record == null) {
+            record = new SysUser();
+        }
+        Example<SysUser> example = Example.of(record);
+        Pageable pageable = new PageRequest(pageNum, pageSize);
+        Page<SysUser> page = sysUserRepository.findAll(example, pageable);
+
+        PageResult<SysUser> result = new PageResult<SysUser>(page, pageNum, pageSize);
+        return result;
     }
 
     @Override

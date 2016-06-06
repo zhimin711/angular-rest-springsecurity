@@ -1,13 +1,13 @@
 
+import com.tcy.app.result.PageResult;
 import com.tcy.sys.entity.SysRole;
 import com.tcy.sys.entity.SysUser;
 import com.tcy.sys.service.SysRoleService;
 import com.tcy.sys.service.SysUserService;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,10 +15,10 @@ import java.util.Set;
 /**
  * Created by 80002023 on 2016/6/3.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:context.xml"})
-public class Junit_sys {
+public class Junit_sys extends AbstractJUnit4SpringContextTests{
 
+    PageResult<?> result;
     @Test
     public void run(){
         this.initData();
@@ -28,7 +28,7 @@ public class Junit_sys {
         SysUser record = new SysUser();
         record.setUsername("admin");
         record.setRealname("admin");
-        record.setEnabled(true);
+       // record.setEnabled(true);
         Set<SysRole> roles = new HashSet<SysRole>();
         SysRole role =new SysRole();
         role.setName("系统管理员");
@@ -36,10 +36,12 @@ public class Junit_sys {
         role.setEnabled(true);
         role.setSys(true);
         roles.add(role);
-        record.setRoles(roles);
-        sysUserService.saveOrUpdate(record);
+        //record.setRoles(roles);
+        //sysUserService.saveOrUpdate(record);
 
         //sysRoleService.saveOrUpdate(role);
+        result= sysUserService.findPage(record,0,10);
+        System.out.println("");
     }
 
     @Autowired

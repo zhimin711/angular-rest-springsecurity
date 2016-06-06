@@ -1,5 +1,7 @@
 package com.tcy.app.generic;
 
+import com.tcy.app.result.PageResult;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,7 +11,6 @@ import java.util.List;
 public interface IHService<T, ID extends Serializable> {
 
     /**
-     *
      * @param record
      * @return
      */
@@ -18,7 +19,6 @@ public interface IHService<T, ID extends Serializable> {
     List<T> saveOrUpdate(List<T> records);
 
     /**
-     *
      * @param id
      * @return
      */
@@ -29,4 +29,12 @@ public interface IHService<T, ID extends Serializable> {
     void delete(List<T> records);
 
     List<T> findAll();
+
+    /**
+     * @param record
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageResult<T> findPage(T record, int pageNum, int pageSize);
 }
