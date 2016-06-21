@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * Created by 80002023 on 2016/6/3.
  */
-@ContextConfiguration(locations = {"classpath:context.xml", "classpath:applicationContext-security.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:applicationContext-security.xml"})
 public class SysTest extends AbstractJUnit4SpringContextTests {
 
     PageResult<?> result;

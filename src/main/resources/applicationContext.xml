@@ -32,6 +32,7 @@
     <!-- Security -->
     <context:component-scan base-package="com.tcy.security"/>
     <!-- Search for Rest Resources and configure them automatically -->
+    <context:component-scan base-package="com.tcy.rest.resource"/>
     <context:component-scan base-package="net.dontdrinkandroot.example.angularrestspringsecurity.rest.resources"/>
 
     <!-- Aspectj -->

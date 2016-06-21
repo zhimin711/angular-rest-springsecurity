@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 /**
  * Created by 80002023 on 2016/6/3.
  */
-@ContextConfiguration(locations = {"classpath:context.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class RestTest extends AbstractJUnit4SpringContextTests {
 
     PageResult<?> result;
