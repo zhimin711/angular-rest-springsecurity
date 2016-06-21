@@ -150,9 +150,13 @@ function CreateController($scope, $location, NewsService) {
 function LoginController($scope, $rootScope, $location, $cookieStore, UserService) {
 	
 	$scope.rememberMe = false;
+
+	$scope.isError = false;
+	$scope.error = "";
 	
 	$scope.login = function() {
 		UserService.authenticate($.param({username: $scope.username, password: $scope.password}), function(authenticationResult) {
+			console.info(authenticationResult)
 			var authToken = authenticationResult.token;
 			$rootScope.authToken = authToken;
 			if ($scope.rememberMe) {
@@ -162,6 +166,11 @@ function LoginController($scope, $rootScope, $location, $cookieStore, UserServic
 				$rootScope.user = user;
 				$location.path("/");
 			});
+		},function(result){
+			console.info(result);
+			if(result.status == 401){
+
+			}
 		});
 	};
 };

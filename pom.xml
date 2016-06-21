@@ -11,6 +11,8 @@
 		<version.com.sun.jersey.contribs>1.19.1</version.com.sun.jersey.contribs>
 		<version.org.hibernate>4.2.21.Final</version.org.hibernate>
 
+
+		<hibernate.version>5.1.0.Final</hibernate.version>
 		<org.slf4j.version>1.7.7</org.slf4j.version>
 		<javax.servlet-api.version>2.5</javax.servlet-api.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -19,6 +21,9 @@
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<junit.version>4.12</junit.version>
 		<org.eclipse.jetty.jetty-maven-plugin.version>9.1.1.v20140108</org.eclipse.jetty.jetty-maven-plugin.version>
+
+		<tcy.snapshot.version>1.0.SNAPSHOT</tcy.snapshot.version>
+		<tcy.release.version>1.1.RELEASE</tcy.release.version>
 	</properties>
 
 	<developers>
@@ -63,7 +68,27 @@
 		<developerConnection>scm:git:https://github.com/zhimin711/angular-rest-springsecurity.git</developerConnection>
 	</scm>
 
+	<repositories>
+		<repository>
+			<id>Releases</id>
+			<name>tcy releases</name>
+			<url>http://hua5040.vicp.cc/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>Snapshots</id>
+			<name>tcy snapshots</name>
+			<url>http://hua5040.vicp.cc/nexus/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
+		<!-- tcy -->
+		<dependency>
+			<groupId>com.tcy</groupId>
+			<artifactId>tcy-core</artifactId>
+			<version>${tcy.release.version}</version>
+		</dependency>
+		<!-- -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -155,7 +180,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${version.org.hibernate}</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 
 		<dependency>

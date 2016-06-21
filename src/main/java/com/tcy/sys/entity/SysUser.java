@@ -1,5 +1,6 @@
 package com.tcy.sys.entity;
 
+import com.tcy.core.base.LongPKEntity;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -15,12 +16,7 @@ import java.util.Set;
 @Table(name = "SYS_USER")
 @DynamicUpdate
 @DynamicInsert
-public class SysUser {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "ID")
-    private Long id;
+public class SysUser extends LongPKEntity {
 
     @Column(name = "USERNAME", unique = true, length = 20, nullable = false)
     private String username;
@@ -28,14 +24,9 @@ public class SysUser {
     @Column(name = "PASSWORD", length = 80)
     private String password;
 
-    @Column(name = "REALNAME", length = 50)
-    private String realname;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "EXPIRES")
     private Date expires;
-    @Column(name = "CREATE_AT", columnDefinition = "timestamp default CURRENT_TIMESTAMP")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createAt;
     @Column(name = "ENABLED")
     private Boolean enabled;
 
@@ -44,13 +35,6 @@ public class SysUser {
     @JoinTable(name = "SYS_USER_ROLE", joinColumns = {@JoinColumn(name = "USER_ID")}, inverseJoinColumns = {@JoinColumn(name = "ROLE_ID")})
     private Set<SysRole> roles;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -68,13 +52,6 @@ public class SysUser {
         this.password = password;
     }
 
-    public String getRealname() {
-        return realname;
-    }
-
-    public void setRealname(String realname) {
-        this.realname = realname;
-    }
 
     public Date getExpires() {
         return expires;
@@ -84,15 +61,11 @@ public class SysUser {
         this.expires = expires;
     }
 
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
 
     public Boolean getEnabled() {
+        if (enabled == null) {
+            return false;
+        }
         return enabled;
     }
 

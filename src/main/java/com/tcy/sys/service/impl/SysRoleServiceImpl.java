@@ -1,5 +1,6 @@
 package com.tcy.sys.service.impl;
 
+import com.tcy.app.result.PageResult;
 import com.tcy.sys.entity.SysRole;
 import com.tcy.sys.repository.SysRoleRepository;
 import com.tcy.sys.service.SysRoleService;
@@ -43,5 +44,10 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     public List<SysRole> findAll() {
         return sysRoleRepository.findAll();
+    }
+
+    @Override
+    public PageResult<SysRole> findPage(SysRole record, int pageNum, int pageSize) {
+        return null;
     }
 }

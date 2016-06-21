@@ -27,14 +27,12 @@ public class Junit_sys extends AbstractJUnit4SpringContextTests{
     public void initData(){
         SysUser record = new SysUser();
         record.setUsername("admin");
-        record.setRealname("admin");
+        record.setName("admin");
        // record.setEnabled(true);
         Set<SysRole> roles = new HashSet<SysRole>();
         SysRole role =new SysRole();
         role.setName("系统管理员");
         role.setKey("SYS_ADMIN");
-        role.setEnabled(true);
-        role.setSys(true);
         roles.add(role);
         //record.setRoles(roles);
         //sysUserService.saveOrUpdate(record);

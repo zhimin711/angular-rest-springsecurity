@@ -1,5 +1,6 @@
 package com.tcy.sys.entity;
 
+import com.tcy.core.base.LongPKEntity;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -11,44 +12,14 @@ import java.util.Set;
 @Entity
 @Table(name = "SYS_ROLE")
 @DynamicUpdate
-public class SysRole {
+public class SysRole extends LongPKEntity{
 
-    @Id
-    @GeneratedValue
-    @Column(name = "ID")
-    private Long id;
-
-    @Column(name = "NAME", length = 50)
-    private String name;
     @Column(name = "ROLE_KEY", unique = true, length = 50)
     private String key;
 
-    @Column(name = "DESCRIPTION", length = 500)
-    private String description;
-    @Column(name = "ENABLED")
-    private Boolean enabled;
-    @Column(name = "IS_SYS")
-    private Boolean isSys;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<SysUser> users;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getKey() {
         return key;
@@ -56,30 +27,6 @@ public class SysRole {
 
     public void setKey(String key) {
         this.key = key;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Boolean getSys() {
-        return isSys;
-    }
-
-    public void setSys(Boolean sys) {
-        isSys = sys;
     }
 
     public Set<SysUser> getUsers() {
