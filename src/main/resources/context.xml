@@ -87,9 +87,6 @@
           class="net.dontdrinkandroot.example.angularrestspringsecurity.dao.newsentry.JpaNewsEntryDao">
     </bean>
 
-    <bean id="userDao" class="net.dontdrinkandroot.example.angularrestspringsecurity.dao.user.JpaUserDao">
-    </bean>
-
     <!--
         INIT REST COMPONENTS
      -->
