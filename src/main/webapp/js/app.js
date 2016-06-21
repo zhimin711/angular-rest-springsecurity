@@ -75,7 +75,6 @@ angular.module('exampleApp', ['ngRoute', 'ngCookies', 'exampleApp.services'])
     });
 
     $rootScope.hasRole = function (role) {
-
         if ($rootScope.user === undefined) {
             return false;
         }

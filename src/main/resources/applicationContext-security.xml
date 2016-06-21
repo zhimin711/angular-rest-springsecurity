@@ -28,10 +28,10 @@
         <security:csrf disabled="true"/>
         <security:custom-filter ref="authenticationTokenProcessingFilter" position="PRE_AUTH_FILTER"/>
         <security:intercept-url pattern="/rest/user/authenticate" access="permitAll"/>
-        <security:intercept-url method="GET" pattern="/rest/news/**" access="hasRole('SYS_ADMIN,USER')"/>
-        <security:intercept-url method="PUT" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')"/>
-        <security:intercept-url method="POST" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')"/>
-        <security:intercept-url method="DELETE" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')"/>
+        <security:intercept-url method="GET" pattern="/rest/news/**" access="hasAnyRole('ROLE_SYS_ADMIN','ROLE_USER')"/>
+        <security:intercept-url method="PUT" pattern="/rest/news/**" access="hasRole('ROLE_SYS_ADMIN')"/>
+        <security:intercept-url method="POST" pattern="/rest/news/**" access="hasRole('ROLE_SYS_ADMIN')"/>
+        <security:intercept-url method="DELETE" pattern="/rest/news/**" access="hasRole('ROLE_SYS_ADMIN')"/>
     </security:http>
 
     <bean id="unauthorizedEntryPoint"

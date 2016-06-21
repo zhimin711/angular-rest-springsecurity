@@ -41,6 +41,7 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 
             UserDetails userDetails = this.userService.loadUserByUsername(userName);
 
+            logger.info("doFilter authorities {}", userDetails.getAuthorities());
             if (TokenUtils.validateToken(authToken, userDetails)) {
 
                 UsernamePasswordAuthenticationToken authentication =

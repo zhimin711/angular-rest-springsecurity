@@ -1,11 +1,12 @@
 package com.tcy.sys.service.impl;
 
 import com.tcy.app.result.PageResult;
+import com.tcy.core.utils.CommonUtils;
 import com.tcy.sys.entity.SysRole;
 import com.tcy.sys.entity.SysUser;
 import com.tcy.sys.repository.SysUserRepository;
 import com.tcy.sys.service.SysUserService;
-import com.tcy.utils.PasswordUtils;
+import com.tcy.core.utils.PasswordUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -30,18 +30,40 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private SysUserRepository sysUserRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     public SysUser saveOrUpdate(SysUser record) {
         Assert.notNull(record);
-        if (record.getId() == null) {
-            if (record.getPassword() == null) {
-                record.setPassword(PasswordUtils.generator());
+        if (CommonUtils.isNotEmpty(record.getId())) {
+            SysUser user = this.find(record.getId());
+            if (user != null) {
+                if (CommonUtils.isNotEmpty(record.getPassword())) {
+                    user.setPassword(PasswordUtils.encryptPassword(record.getPassword()));
+                }
+                if (CommonUtils.isNotEmpty(record.getName())) {
+                    user.setName(record.getName());
+                }
+                if (CommonUtils.isNotEmpty(record.getExpires())) {
+                    user.setExpires(record.getExpires());
+                }
+                if (CommonUtils.isNotEmpty(record.getEnabled())) {
+                    user.setEnabled(record.getEnabled());
+                }
+                if (CommonUtils.isNotEmpty(record.getRoles())) {
+                    user.setRoles(record.getRoles());
+                }
+                if (CommonUtils.isNotEmpty(record.getUpdator())) {
+                    user.setUpdator(record.getUpdator());
+                }
+                if (CommonUtils.isNotEmpty(record.getUpdateAt())) {
+                    user.setUpdateAt(record.getUpdateAt());
+                }
+
+                record = user;
             }
-            record.setPassword(passwordEncoder.encode(record.getPassword()));
         } else {
-            record.setPassword(null);
+            if (record.getPassword() == null) {
+                record.setPassword(PasswordUtils.encryptPassword(PasswordUtils.generate()));
+            }
         }
         logger.info("user save or update password: {}", record.getPassword());
         return sysUserRepository.save(record);

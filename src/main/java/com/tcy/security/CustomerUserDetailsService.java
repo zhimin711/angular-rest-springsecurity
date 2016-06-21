@@ -46,6 +46,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
         Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (SysRole role : user.getRoles()) {
             authorities.add(new SimpleGrantedAuthority(Constants.SECURITY_PREFFIX + role.getKey()));
+//            authorities.add(new SimpleGrantedAuthority(role.getKey()));
         }
         return new User(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jee="http://www.springframework.org/schema/jee"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:security="http://www.springframework.org/schema/security"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
 			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
-			http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+			http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--
         SPRING SETUP
@@ -34,6 +34,7 @@
     <!-- Search for Rest Resources and configure them automatically -->
     <context:component-scan base-package="net.dontdrinkandroot.example.angularrestspringsecurity.rest.resources"/>
 
+    <!-- Aspectj -->
     <aop:aspectj-autoproxy/>
 
     <bean class="com.tcy.app.aspectj.MonitorSaveOrUpdateAspect"/>
@@ -94,41 +95,5 @@
      -->
 
     <bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper"/>
-
-    <!--
-        SPRING SECURITY SETUP
-    -->
-    <bean id="passwordEncoder" class="com.tcy.security.PasswordService"/>
-
-    <bean id="passwordEncoder2" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
-        <constructor-arg value="${app.secret}"/>
-    </bean>
-
-    <security:authentication-manager id="authenticationManager">
-        <security:authentication-provider user-service-ref="customerUserDetailsService">
-            <security:password-encoder ref="passwordEncoder"></security:password-encoder>
-        </security:authentication-provider>
-    </security:authentication-manager>
-
-    <security:http
-            entry-point-ref="unauthorizedEntryPoint"
-            authentication-manager-ref="authenticationManager"
-            create-session="stateless">
-        <security:csrf disabled="true"/>
-        <security:custom-filter ref="authenticationTokenProcessingFilter" position="PRE_AUTH_FILTER"/>
-        <security:intercept-url pattern="/rest/user/authenticate" access="permitAll"/>
-        <security:intercept-url method="GET" pattern="/rest/news/**" access="hasRole('SYS_ADMIN,USER')"/>
-        <security:intercept-url method="PUT" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')"/>
-        <security:intercept-url method="POST" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')"/>
-        <security:intercept-url method="DELETE" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')"/>
-    </security:http>
-
-    <bean id="unauthorizedEntryPoint"
-          class="net.dontdrinkandroot.example.angularrestspringsecurity.rest.UnauthorizedEntryPoint"/>
-
-    <bean id="authenticationTokenProcessingFilter"
-          class="net.dontdrinkandroot.example.angularrestspringsecurity.rest.AuthenticationTokenProcessingFilter">
-        <constructor-arg ref="customerUserDetailsService"/>
-    </bean>
 
 </beans>

@@ -11,13 +11,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by 80002023 on 2016/6/3.
  */
-@ContextConfiguration(locations = {"classpath:context.xml"})
-public class SysTest extends AbstractJUnit4SpringContextTests{
+@ContextConfiguration(locations = {"classpath:context.xml", "classpath:applicationContext-security.xml"})
+public class SysTest extends AbstractJUnit4SpringContextTests {
 
     PageResult<?> result;
 
@@ -49,17 +50,21 @@ public class SysTest extends AbstractJUnit4SpringContextTests{
         SysUser record = new SysUser();
         switch (i) {
             case 1:
-                record.setUsername("admin3");
-                record.setName("系统管理员3");
-                record.setEnabled(true);
+                record.setId(39L);
+//                record.setUsername("admin3");
+//                record.setName("系统管理员3");
+//                record.setEnabled(true);
+                record.setPassword("123456");
                 sysUserService.saveOrUpdate(record);
                 break;
             case 2:
-                Set<SysRole> roles = new HashSet<SysRole>();
+                record.setId(30L);
+                List<SysRole> roleList = sysRoleService.findAll();
+                Set<SysRole> roles = new HashSet<SysRole>(roleList);
                 //roles.add(roles);
-                //record.setRoles(roles);
+                record.setRoles(roles);
 
-                //sysRoleService.saveOrUpdate(role);
+                sysUserService.saveOrUpdate(record);
                 break;
             case 3:
                 result = sysUserService.findPage(record, 0, 10);
