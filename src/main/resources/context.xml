@@ -34,6 +34,9 @@
     <!-- Search for Rest Resources and configure them automatically -->
     <context:component-scan base-package="net.dontdrinkandroot.example.angularrestspringsecurity.rest.resources"/>
 
+    <aop:aspectj-autoproxy/>
+
+    <bean class="com.tcy.app.aspectj.MonitorSaveOrUpdateAspect"/>
     <!--
         DATABASE SETUP
      -->

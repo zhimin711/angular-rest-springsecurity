@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+			http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+    <!-- SECURITY COMPONENT -->
+    <context:component-scan base-package="com.tcy.security"/>
+
+    <!--
+        SPRING SECURITY SETUP
+    -->
+    <bean id="passwordEncoder" class="com.tcy.security.PasswordService"/>
+
+    <security:authentication-manager id="authenticationManager">
+        <security:authentication-provider user-service-ref="customerUserDetailsService">
+            <security:password-encoder ref="passwordEncoder"></security:password-encoder>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <security:http
+            entry-point-ref="unauthorizedEntryPoint"
+            authentication-manager-ref="authenticationManager"
+            create-session="stateless">
+        <security:csrf disabled="true"/>
+        <security:custom-filter ref="authenticationTokenProcessingFilter" position="PRE_AUTH_FILTER"/>
+        <security:intercept-url pattern="/rest/user/authenticate" access="permitAll"/>
+        <security:intercept-url method="GET" pattern="/rest/news/**" access="hasRole('SYS_ADMIN,USER')"/>
+        <security:intercept-url method="PUT" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')"/>
+        <security:intercept-url method="POST" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')"/>
+        <security:intercept-url method="DELETE" pattern="/rest/news/**" access="hasRole('SYS_ADMIN')"/>
+    </security:http>
+
+    <bean id="unauthorizedEntryPoint"
+          class="net.dontdrinkandroot.example.angularrestspringsecurity.rest.UnauthorizedEntryPoint"/>
+
+    <bean id="authenticationTokenProcessingFilter"
+          class="net.dontdrinkandroot.example.angularrestspringsecurity.rest.AuthenticationTokenProcessingFilter">
+        <constructor-arg ref="customerUserDetailsService"/>
+    </bean>
+
+</beans>

@@ -23,6 +23,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     private SysRoleRepository sysRoleRepository;
 
     public SysRole saveOrUpdate(SysRole record) {
+        logger.info("system role save or update.");
         return sysRoleRepository.save(record);
     }
 
