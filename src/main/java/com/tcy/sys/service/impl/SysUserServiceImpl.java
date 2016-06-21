@@ -1,6 +1,6 @@
 package com.tcy.sys.service.impl;
 
-import com.tcy.app.result.PageResult;
+import com.tcy.core.http.result.PageResult;
 import com.tcy.core.utils.CommonUtils;
 import com.tcy.sys.entity.SysRole;
 import com.tcy.sys.entity.SysUser;
@@ -75,6 +75,11 @@ public class SysUserServiceImpl implements SysUserService {
 
     public SysUser find(Long id) {
         return sysUserRepository.findOne(id);
+    }
+
+    @Override
+    public List<SysUser> find(SysUser sysUser) {
+        return null;
     }
 
     public void delete(Long id) {

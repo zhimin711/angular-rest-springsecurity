@@ -1,6 +1,6 @@
 package com.tcy.blog.entity;
 
-import com.tcy.core.base.LongPKEntity;
+import com.tcy.core.entity.LongPKEntity;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.DynamicUpdate;
 

@@ -1,6 +1,6 @@
 package junit;
 
-import com.tcy.app.result.PageResult;
+import com.tcy.core.http.result.PageResult;
 import com.tcy.sys.entity.SysRole;
 import com.tcy.sys.entity.SysUser;
 import com.tcy.sys.service.SysRoleService;

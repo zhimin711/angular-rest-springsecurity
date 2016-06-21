@@ -22,7 +22,7 @@
 		<junit.version>4.12</junit.version>
 
 		<tcy.snapshot.version>1.0.SNAPSHOT</tcy.snapshot.version>
-		<tcy.release.version>1.1.RELEASE</tcy.release.version>
+		<tcy.release.version>1.2.RELEASE</tcy.release.version>
 	</properties>
 
 	<developers>

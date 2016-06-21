@@ -1,8 +1,8 @@
 package com.tcy.app.aspectj;
 
-import com.tcy.core.base.BaseEntity;
-import com.tcy.core.base.LongPKEntity;
-import com.tcy.core.base.StringPKEntity;
+import com.tcy.core.entity.BaseEntity;
+import com.tcy.core.entity.LongPKEntity;
+import com.tcy.core.entity.StringPKEntity;
 import com.tcy.core.utils.CommonUtils;
 import com.tcy.core.utils.DateUtils;
 import com.tcy.security.SecurityUtils;

@@ -1,6 +1,6 @@
 package com.tcy.sys.service.impl;
 
-import com.tcy.app.result.PageResult;
+import com.tcy.core.http.result.PageResult;
 import com.tcy.sys.entity.SysRole;
 import com.tcy.sys.repository.SysRoleRepository;
 import com.tcy.sys.service.SysRoleService;
@@ -33,6 +33,11 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     public SysRole find(Long id) {
         return sysRoleRepository.findOne(id);
+    }
+
+    @Override
+    public List<SysRole> find(SysRole sysRole) {
+        return null;
     }
 
     public void delete(Long id) {

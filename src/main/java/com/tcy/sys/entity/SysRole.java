@@ -1,6 +1,6 @@
 package com.tcy.sys.entity;
 
-import com.tcy.core.base.LongPKEntity;
+import com.tcy.core.entity.LongPKEntity;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
