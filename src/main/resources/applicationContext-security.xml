@@ -17,7 +17,7 @@
 
     <security:authentication-manager id="authenticationManager">
         <security:authentication-provider user-service-ref="customerUserDetailsService">
-            <security:password-encoder ref="passwordEncoder"></security:password-encoder>
+            <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 
