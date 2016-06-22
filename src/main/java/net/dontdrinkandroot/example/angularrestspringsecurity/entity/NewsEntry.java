@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import net.dontdrinkandroot.example.angularrestspringsecurity.JsonViews;
+import com.tcy.app.JsonViews;
 
 import org.codehaus.jackson.map.annotate.JsonView;
 

@@ -2,10 +2,7 @@ package com.tcy.rest.resource;
 
 import com.tcy.blog.entity.BlogArticle;
 import com.tcy.blog.service.BlogArticleService;
-import net.dontdrinkandroot.example.angularrestspringsecurity.JsonViews;
-import net.dontdrinkandroot.example.angularrestspringsecurity.dao.newsentry.NewsEntryDao;
-import net.dontdrinkandroot.example.angularrestspringsecurity.entity.NewsEntry;
-import net.dontdrinkandroot.example.angularrestspringsecurity.entity.Role;
+import com.tcy.app.JsonViews;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -13,9 +10,6 @@ import org.codehaus.jackson.map.ObjectWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -25,7 +19,7 @@ import java.util.List;
 
 
 @Component
-@Path("blog/article")
+@Path("/blog/article")
 public class BlogArticleResource {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

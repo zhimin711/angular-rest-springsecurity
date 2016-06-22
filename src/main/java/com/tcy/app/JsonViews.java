@@ -1,4 +1,4 @@
-package net.dontdrinkandroot.example.angularrestspringsecurity;
+package com.tcy.app;
 
 public class JsonViews {
 

@@ -25,7 +25,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import net.dontdrinkandroot.example.angularrestspringsecurity.JsonViews;
+import com.tcy.app.JsonViews;
 import net.dontdrinkandroot.example.angularrestspringsecurity.dao.newsentry.NewsEntryDao;
 import net.dontdrinkandroot.example.angularrestspringsecurity.entity.NewsEntry;
 import net.dontdrinkandroot.example.angularrestspringsecurity.entity.Role;
